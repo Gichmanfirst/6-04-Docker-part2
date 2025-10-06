@@ -1,4 +1,29 @@
 services:
+  AvvakumovOA-netology-pushgateway:
+    image: prom/pushgateway:v1.6.2
+    container_name: AvvakumovOA-netology-pushgateway
+    ports:
+      - "9091:9091"
+    networks:
+      - AvvakumovOA-my-netology-hw
+    restart: unless-stopped
+
+  AvvakumovOA-netology-prometheus:
+    image: prom/prometheus:v2.47.2
+    container_name: AvvakumovOA-netology-prometheus
+    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./6-04/prometheus:/etc/prometheus:ro
+      - prometheus-data:/prometheus
+    networks:
+      - AvvakumovOA-my-netology-hw
+    depends_on:
+      AvvakumovOA-netology-pushgateway:
+        condition: service_started
+    restart: always
+
   AvvakumovOA-netology-grafana:
     image: grafana/grafana:latest
     container_name: AvvakumovOA-netology-grafana
@@ -7,36 +32,13 @@ services:
     ports:
       - "80:3000"
     volumes:
-      - ./6-04/grafana/custom.ini:/etc/grafana/custom.ini:ro  
+      - ./6-04/grafana/custom.ini:/etc/grafana/custom.ini:ro
       - grafana-data:/var/lib/grafana
     networks:
       - AvvakumovOA-my-netology-hw
     depends_on:
-      - AvvakumovOA-netology-prometheus
-    restart: unless-stopped
-
-  AvvakumovOA-netology-prometheus:
-    image: prom/prometheus:v2.47.2
-    container_name: AvvakumovOA-netology-prometheus
-    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
-    ports:
-      - "9090:9090"                 # внешний доступ с докер-сервера
-    volumes:
-      - /home/sysadmin/6-04-Docker-part2/6-04/prometheus:/etc/prometheus:ro  # конфиг из репо
-      - prometheus-data:/prometheus           # данные TSDB
-    networks:
-      - AvvakumovOA-my-netology-hw
-    restart: unless-stopped
-
-  AvvakumovOA-netology-pushgateway:
-    image: prom/pushgateway:v1.6.2
-    container_name: AvvakumovOA-netology-pushgateway
-    ports:
-      - "9091:9091"                       # внешний доступ с докер-сервера
-    networks:
-      AvvakumovOA-my-netology-hw:
-        aliases:
-          - pushgateway                   
+      AvvakumovOA-netology-prometheus:
+        condition: service_started
     restart: unless-stopped
 
 volumes:
@@ -45,6 +47,7 @@ volumes:
 
 networks:
   AvvakumovOA-my-netology-hw:
+    name: AvvakumovOA-my-netology-hw
     driver: bridge
     ipam:
       config:
