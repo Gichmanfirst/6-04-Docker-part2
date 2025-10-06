@@ -8,7 +8,7 @@
 
 Docker Compose — это инструмент, который позволяет запускать и управлять несколькими контейнерами Docker как единым приложением с помощью одного файла конфигурации (обычно docker-compose.yml). Вместо того чтобы вручную запускать отдельные контейнеры для базы данных, веб-сервера и других сервисов, я просто пишу один файл и командой docker-compose up поднимаю всё окружение целиком. Это сильно упрощает разработку: не нужно каждый раз настраивать зависимости, всё изолировано, легко воспроизводится на другом компьютере, и я не боюсь «сломать» основную систему. Лично мне это экономит кучу времени и нервов — особенно когда нужно быстро протестировать идею или развернуть локально полноценное приложение.
 
-![Docker composer version](https://drive.google.com/file/d/1135_GARokWQhPNQUcU0Of0sdv671ygkN/view?usp=sharing)
+![Docker composer version](https://drive.google.com/file/d/1135_GARokWQhPNQUcU0Of0sdv671ygkN/view)
 
 
 ---
@@ -77,7 +77,7 @@ scrape_configs:
       - targets: ["localhost:9090"]
 ```
 
-![docker compose up -d](https://drive.google.com/file/d/1gHfuZK0SfJZLzxQQCImkYIGMEcn7RmHo/view?usp=sharing)
+![docker compose up -d](https://drive.google.com/file/d/1gHfuZK0SfJZLzxQQCImkYIGMEcn7RmHo/view)
 
 ---
 
@@ -139,9 +139,9 @@ scrape_configs:
 
 
 
-![prometheus_pushgateaway_bash](https://drive.google.com/file/d/1xqRwuTkA5K4_ftmldO26EwVVi3VYIY2V/view?usp=sharing)
-![prometheus](https://drive.google.com/file/d/1eVJCNe3vf6wDtIRnGmKuPZ_7JmosjVLC/view?usp=sharing)
-![pushgateaway](https://drive.google.com/file/d/18q_ugnh6loIIlBsyuowiaZC53F9BXIL_/view?usp=sharing)
+![prometheus_pushgateaway_bash](https://drive.google.com/file/d/1xqRwuTkA5K4_ftmldO26EwVVi3VYIY2V/view)
+![prometheus](https://drive.google.com/file/d/1eVJCNe3vf6wDtIRnGmKuPZ_7JmosjVLC/view)
+![pushgateaway](https://drive.google.com/file/d/18q_ugnh6loIIlBsyuowiaZC53F9BXIL_/view)
 
 ---
 
@@ -214,7 +214,7 @@ admin_password = netology
 
 
 
-![Grafana bash](https://drive.google.com/file/d/1xCNridyK4tGZYYVyEQ7HqT9GywEB9GVv/view?usp=sharing)
+![Grafana bash](https://drive.google.com/file/d/1xCNridyK4tGZYYVyEQ7HqT9GywEB9GVv/view)
 
 ---
 
@@ -297,20 +297,28 @@ services:
     ports:
       - "9091:9091"
     networks:
-      - AvvakumovOA-my-netology-hw
+      AvvakumovOA-my-netology-hw:
+        aliases:
+          - pushgateway         
     restart: unless-stopped
 
   AvvakumovOA-netology-prometheus:
     image: prom/prometheus:v2.47.2
     container_name: AvvakumovOA-netology-prometheus
-    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
+    command: >
+      --web.enable-lifecycle
+      --config.file=/etc/prometheus/prometheus.yml
+      --storage.tsdb.path=/prometheus
+      --storage.tsdb.retention.time=1d           
     ports:
       - "9090:9090"
     volumes:
       - ./6-04/prometheus:/etc/prometheus:ro
       - prometheus-data:/prometheus
     networks:
-      - AvvakumovOA-my-netology-hw
+      AvvakumovOA-my-netology-hw:
+        aliases:
+          - prometheus          
     depends_on:
       AvvakumovOA-netology-pushgateway:
         condition: service_started
@@ -348,11 +356,13 @@ networks:
 
 ```
 
-![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
+![docker compose up -d  docker compose ps](https://drive.google.com/file/d/1UCCK5Oueb0yTimI3Zf7bHPGnfsws5Tn0/view)
+![Grafana](https://drive.google.com/file/d/1TWt62iLX_l_fBlKwFfJ5M_5_kLuzgViV/view)
 
 ---
 
-### Задание 7
+### Задание 8
+
 ![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
 ![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
 ![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
