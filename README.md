@@ -149,16 +149,17 @@ scrape_configs:
 `docker-compose.yml`
 ```
 services:
+  services:
   AvvakumovOA-netology-grafana:
     image: grafana/grafana:latest
     container_name: AvvakumovOA-netology-grafana
     environment:
-      GF_PATHS_CONFIG: /etc/grafana/custom.ini     # путь до кастомного ini внутри контейнера
+      GF_PATHS_CONFIG: /etc/grafana/custom.ini
     ports:
-      - "80:3000"                                  # внешний доступ к 3000 с порта 80 хоста
+      - "80:3000"
     volumes:
-      - ./6-04/grafana:/etc/grafana:ro             # том с конфигурацией (custom.ini)
-      - grafana-data:/var/lib/grafana              # том с данными
+      - ./6-04/grafana/custom.ini:/etc/grafana/custom.ini:ro  
+      - grafana-data:/var/lib/grafana
     networks:
       - AvvakumovOA-my-netology-hw
     depends_on:
@@ -170,7 +171,7 @@ services:
     container_name: AvvakumovOA-netology-prometheus
     command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
     ports:
-      - "9090:9090"                 # внешний доступ с докер-сервера
+      - "9090:9090"                 
     volumes:
       - /home/sysadmin/6-04-Docker-part2/6-04/prometheus:/etc/prometheus:ro  # конфиг из репо
       - prometheus-data:/prometheus           # данные TSDB
