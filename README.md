@@ -279,31 +279,86 @@ networks:
           gateway: 10.5.0.1
 ```
 
-![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view?usp=sharing)
+![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
 
 ---
 
 
 ### Задание 7
 
-`Приведите ответ в свободной форме........`
+`docker-compose.yml`
 
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+services:
+  AvvakumovOA-netology-pushgateway:
+    image: prom/pushgateway:v1.6.2
+    container_name: AvvakumovOA-netology-pushgateway
+    ports:
+      - "9091:9091"
+    networks:
+      - AvvakumovOA-my-netology-hw
+    restart: unless-stopped
+
+  AvvakumovOA-netology-prometheus:
+    image: prom/prometheus:v2.47.2
+    container_name: AvvakumovOA-netology-prometheus
+    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./6-04/prometheus:/etc/prometheus:ro
+      - prometheus-data:/prometheus
+    networks:
+      - AvvakumovOA-my-netology-hw
+    depends_on:
+      AvvakumovOA-netology-pushgateway:
+        condition: service_started
+    restart: always
+
+  AvvakumovOA-netology-grafana:
+    image: grafana/grafana:latest
+    container_name: AvvakumovOA-netology-grafana
+    environment:
+      GF_PATHS_CONFIG: /etc/grafana/custom.ini
+    ports:
+      - "80:3000"
+    volumes:
+      - ./6-04/grafana/custom.ini:/etc/grafana/custom.ini:ro
+      - grafana-data:/var/lib/grafana
+    networks:
+      - AvvakumovOA-my-netology-hw
+    depends_on:
+      AvvakumovOA-netology-prometheus:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  prometheus-data:
+  grafana-data:
+
+networks:
+  AvvakumovOA-my-netology-hw:
+    name: AvvakumovOA-my-netology-hw
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
+
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
+![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
+
+---
+
+### Задание 7
+![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
+![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
+![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
+![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
+
+
+
 
 

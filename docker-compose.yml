@@ -5,20 +5,28 @@ services:
     ports:
       - "9091:9091"
     networks:
-      - AvvakumovOA-my-netology-hw
+      AvvakumovOA-my-netology-hw:
+        aliases:
+          - pushgateway         
     restart: unless-stopped
 
   AvvakumovOA-netology-prometheus:
     image: prom/prometheus:v2.47.2
     container_name: AvvakumovOA-netology-prometheus
-    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
+    command: >
+      --web.enable-lifecycle
+      --config.file=/etc/prometheus/prometheus.yml
+      --storage.tsdb.path=/prometheus
+      --storage.tsdb.retention.time=1d           
     ports:
       - "9090:9090"
     volumes:
       - ./6-04/prometheus:/etc/prometheus:ro
       - prometheus-data:/prometheus
     networks:
-      - AvvakumovOA-my-netology-hw
+      AvvakumovOA-my-netology-hw:
+        aliases:
+          - prometheus          
     depends_on:
       AvvakumovOA-netology-pushgateway:
         condition: service_started
