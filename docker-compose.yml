@@ -1,9 +1,21 @@
 version: "3.8"
 
-services: {}
-  # Сервисы добавим в следующих заданиях.
-  
-volumes: {}
+services:
+  AvvakumovOA-netology-prometheus:
+    image: prom/prometheus:v2.47.2
+    container_name: AvvakumovOA-netology-prometheus
+    command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
+    ports:
+      - "9090:9090"                 # внешний доступ с докер-сервера
+    volumes:
+      - ./6-04/prometheus:/etc/prometheus:ro  # конфиг из репо
+      - prometheus-data:/prometheus           # данные TSDB
+    networks:
+      - AvvakumovOA-my-netology-hw
+    restart: unless-stopped
+
+volumes:
+  prometheus-data:
 
 networks:
   AvvakumovOA-my-netology-hw:
