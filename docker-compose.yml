@@ -8,7 +8,7 @@ services:
     ports:
       - "9090:9090"                 # внешний доступ с докер-сервера
     volumes:
-      - ./6-04/prometheus:/etc/prometheus:ro  # конфиг из репо
+      - /home/sysadmin/6-04-Docker-part2/6-04/prometheus:/etc/prometheus:ro  # конфиг из репо
       - prometheus-data:/prometheus           # данные TSDB
     networks:
       - AvvakumovOA-my-netology-hw
