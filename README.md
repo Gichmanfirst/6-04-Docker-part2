@@ -213,7 +213,7 @@ admin_password = netology
 
 
 
-![Название скриншота](ссылка на скриншот)
+![Grafana bash](https://drive.google.com/file/d/1xCNridyK4tGZYYVyEQ7HqT9GywEB9GVv/view?usp=sharing)
 
 ### Задание 6
 
