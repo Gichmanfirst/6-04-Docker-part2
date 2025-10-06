@@ -146,25 +146,73 @@ scrape_configs:
 
 ### Задание 5
 
-`Приведите ответ в свободной форме........`
+`docker-compose.yml`
+```
+services:
+  AvvakumovOA-netology-grafana:
+    image: grafana/grafana:latest
+    container_name: AvvakumovOA-netology-grafana
+    environment:
+      GF_PATHS_CONFIG: /etc/grafana/custom.ini     # путь до кастомного ini внутри контейнера
+    ports:
+      - "80:3000"                                  # внешний доступ к 3000 с порта 80 хоста
+    volumes:
+      - ./6-04/grafana:/etc/grafana:ro             # том с конфигурацией (custom.ini)
+      - grafana-data:/var/lib/grafana              # том с данными
+    networks:
+      - AvvakumovOA-my-netology-hw
+    depends_on:
+      - AvvakumovOA-netology-prometheus
+    restart: unless-stopped
 
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
+  AvvakumovOA-netology-prometheus:
+    image: prom/prometheus:v2.47.2
+    container_name: AvvakumovOA-netology-prometheus
+    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
+    ports:
+      - "9090:9090"                 # внешний доступ с докер-сервера
+    volumes:
+      - /home/sysadmin/6-04-Docker-part2/6-04/prometheus:/etc/prometheus:ro  # конфиг из репо
+      - prometheus-data:/prometheus           # данные TSDB
+    networks:
+      - AvvakumovOA-my-netology-hw
+    restart: unless-stopped
+
+  AvvakumovOA-netology-pushgateway:
+    image: prom/pushgateway:v1.6.2
+    container_name: AvvakumovOA-netology-pushgateway
+    ports:
+      - "9091:9091"                       # внешний доступ с докер-сервера
+    networks:
+      AvvakumovOA-my-netology-hw:
+        aliases:
+          - pushgateway                   
+    restart: unless-stopped
+
+volumes:
+  prometheus-data:
+  grafana-data:
+
+networks:
+  AvvakumovOA-my-netology-hw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+
+`custom.ini`
+```
+[security]
+admin_user = AvvakumovOA
+admin_password = netology
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
+
+
+![Название скриншота](ссылка на скриншот)
 
 ### Задание 6
 

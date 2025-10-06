@@ -1,4 +1,20 @@
 services:
+  AvvakumovOA-netology-grafana:
+    image: grafana/grafana:latest
+    container_name: AvvakumovOA-netology-grafana
+    environment:
+      GF_PATHS_CONFIG: /etc/grafana/custom.ini     # путь до кастомного ini внутри контейнера
+    ports:
+      - "80:3000"                                  # внешний доступ к 3000 с порта 80 хоста
+    volumes:
+      - ./6-04/grafana:/etc/grafana:ro             # том с конфигурацией (custom.ini)
+      - grafana-data:/var/lib/grafana              # том с данными
+    networks:
+      - AvvakumovOA-my-netology-hw
+    depends_on:
+      - AvvakumovOA-netology-prometheus
+    restart: unless-stopped
+
   AvvakumovOA-netology-prometheus:
     image: prom/prometheus:v2.47.2
     container_name: AvvakumovOA-netology-prometheus
@@ -25,6 +41,7 @@ services:
 
 volumes:
   prometheus-data:
+  grafana-data:
 
 networks:
   AvvakumovOA-my-netology-hw:
