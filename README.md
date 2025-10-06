@@ -8,7 +8,7 @@
 
 Docker Compose — это инструмент, который позволяет запускать и управлять несколькими контейнерами Docker как единым приложением с помощью одного файла конфигурации (обычно docker-compose.yml). Вместо того чтобы вручную запускать отдельные контейнеры для базы данных, веб-сервера и других сервисов, я просто пишу один файл и командой docker-compose up поднимаю всё окружение целиком. Это сильно упрощает разработку: не нужно каждый раз настраивать зависимости, всё изолировано, легко воспроизводится на другом компьютере, и я не боюсь «сломать» основную систему. Лично мне это экономит кучу времени и нервов — особенно когда нужно быстро протестировать идею или развернуть локально полноценное приложение.
 
-![Docker composer version](/img/1.png)
+![Docker composer version](img/1.png)
 
 
 ---
@@ -77,7 +77,7 @@ scrape_configs:
       - targets: ["localhost:9090"]
 ```
 
-![docker compose up -d](https://drive.google.com/file/d/1gHfuZK0SfJZLzxQQCImkYIGMEcn7RmHo/view)
+![docker compose up -d](img/3-1.png)
 
 ---
 
@@ -139,9 +139,9 @@ scrape_configs:
 
 
 
-![prometheus_pushgateaway_bash](https://drive.google.com/file/d/1xqRwuTkA5K4_ftmldO26EwVVi3VYIY2V/view)
-![prometheus](https://drive.google.com/file/d/1eVJCNe3vf6wDtIRnGmKuPZ_7JmosjVLC/view)
-![pushgateaway](https://drive.google.com/file/d/18q_ugnh6loIIlBsyuowiaZC53F9BXIL_/view)
+![prometheus_pushgateaway_bash](img/4-1.png)
+![prometheus](img/4-2.png)
+![pushgateaway](img/4-3.png)
 
 ---
 
@@ -214,7 +214,7 @@ admin_password = netology
 
 
 
-![Grafana bash](https://drive.google.com/file/d/1xCNridyK4tGZYYVyEQ7HqT9GywEB9GVv/view)
+![Grafana bash](img/5.png)
 
 ---
 
@@ -279,7 +279,7 @@ networks:
           gateway: 10.5.0.1
 ```
 
-![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
+![docker compose up -d](img/6.png)
 
 ---
 
@@ -356,14 +356,14 @@ networks:
 
 ```
 
-![docker compose up -d  docker compose ps](https://drive.google.com/file/d/1UCCK5Oueb0yTimI3Zf7bHPGnfsws5Tn0/view)
-![Grafana](https://drive.google.com/file/d/1TWt62iLX_l_fBlKwFfJ5M_5_kLuzgViV/view)
+![docker compose up -d  docker compose ps](img/7-1.png)
+![Grafana](img/7-2.png)
 
 ---
 
 ### Задание 8
 
-![docker compose down -v --remove-orphans](https://drive.google.com/file/d/1fEHVzuAMopFQ7F4J4RZiz7gaIkv1BW3m/view?usp=sharing)
+![docker compose down -v --remove-orphans](img/8.png)
 
 
 
