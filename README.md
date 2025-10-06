@@ -83,6 +83,69 @@ scrape_configs:
 
 ### Задание 4
 
+`docker-compose.yml`
+
+```
+services:
+  AvvakumovOA-netology-prometheus:
+    image: prom/prometheus:v2.47.2
+    container_name: AvvakumovOA-netology-prometheus
+    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
+    ports:
+      - "9090:9090"                 # внешний доступ с докер-сервера
+    volumes:
+      - /home/sysadmin/6-04-Docker-part2/6-04/prometheus:/etc/prometheus:ro  # конфиг из репо
+      - prometheus-data:/prometheus           # данные TSDB
+    networks:
+      - AvvakumovOA-my-netology-hw
+    restart: unless-stopped
+
+  AvvakumovOA-netology-pushgateway:
+    image: prom/pushgateway:v1.6.2
+    container_name: AvvakumovOA-netology-pushgateway
+    ports:
+      - "9091:9091"                       # внешний доступ с докер-сервера
+    networks:
+      AvvakumovOA-my-netology-hw:
+        aliases:
+          - pushgateway                   
+    restart: unless-stopped
+
+volumes:
+  prometheus-data:
+
+networks:
+  AvvakumovOA-my-netology-hw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
+```
+
+`prometheus.yml`
+```
+global:
+  scrape_interval: 15s
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+  - job_name: "pushgateway"
+    honor_labels: true
+    static_configs:
+      - targets: ["pushgateway:9091"]  
+```
+
+
+
+[prometheus_pushgateaway_bash](https://drive.google.com/file/d/1xqRwuTkA5K4_ftmldO26EwVVi3VYIY2V/view?usp=sharing)
+[prometheus](https://drive.google.com/file/d/1eVJCNe3vf6wDtIRnGmKuPZ_7JmosjVLC/view?usp=sharing)
+[pushgateaway](https://drive.google.com/file/d/18q_ugnh6loIIlBsyuowiaZC53F9BXIL_/view?usp=sharing)
+
+
+### Задание 5
+
 `Приведите ответ в свободной форме........`
 
 1. `Заполните здесь этапы выполнения, если требуется ....`
@@ -102,3 +165,50 @@ scrape_configs:
 
 `При необходимости прикрепитe сюда скриншоты
 ![Название скриншота](ссылка на скриншот)`
+
+### Задание 6
+
+`Приведите ответ в свободной форме........`
+
+1. `Заполните здесь этапы выполнения, если требуется ....`
+2. `Заполните здесь этапы выполнения, если требуется ....`
+3. `Заполните здесь этапы выполнения, если требуется ....`
+4. `Заполните здесь этапы выполнения, если требуется ....`
+5. `Заполните здесь этапы выполнения, если требуется ....`
+6. 
+
+```
+Поле для вставки кода...
+....
+....
+....
+....
+```
+
+`При необходимости прикрепитe сюда скриншоты
+![Название скриншота](ссылка на скриншот)`
+
+
+### Задание 7
+
+`Приведите ответ в свободной форме........`
+
+1. `Заполните здесь этапы выполнения, если требуется ....`
+2. `Заполните здесь этапы выполнения, если требуется ....`
+3. `Заполните здесь этапы выполнения, если требуется ....`
+4. `Заполните здесь этапы выполнения, если требуется ....`
+5. `Заполните здесь этапы выполнения, если требуется ....`
+6. 
+
+```
+Поле для вставки кода...
+....
+....
+....
+....
+```
+
+`При необходимости прикрепитe сюда скриншоты
+![Название скриншота](ссылка на скриншот)`
+
+
