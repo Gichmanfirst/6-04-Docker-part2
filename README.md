@@ -77,7 +77,7 @@ scrape_configs:
       - targets: ["localhost:9090"]
 ```
 
-[docker compose up -d](https://drive.google.com/file/d/1135_GARokWQhPNQUcU0Of0sdv671ygkN/view?usp=sharing)
+[docker compose up -d](https://drive.google.com/file/d/188IclTT8RrdMNZZ0eKj1zJjIntmg045u/view?usp=sharing)
 
 ---
 
