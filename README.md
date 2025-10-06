@@ -77,8 +77,7 @@ scrape_configs:
       - targets: ["localhost:9090"]
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
+[docker compose up -d](https://drive.google.com/file/d/1135_GARokWQhPNQUcU0Of0sdv671ygkN/view?usp=sharing)
 
 ---
 
