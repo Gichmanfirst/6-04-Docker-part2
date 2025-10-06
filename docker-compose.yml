@@ -14,6 +14,17 @@ services:
       - AvvakumovOA-my-netology-hw
     restart: unless-stopped
 
+  AvvakumovOA-netology-pushgateway:
+    image: prom/pushgateway:v1.6.2
+    container_name: AvvakumovOA-netology-pushgateway
+    ports:
+      - "9091:9091"                       # внешний доступ с докер-сервера
+    networks:
+      AvvakumovOA-my-netology-hw:
+        aliases:
+          - pushgateway                   
+    restart: unless-stopped
+
 volumes:
   prometheus-data:
 
