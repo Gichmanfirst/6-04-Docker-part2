@@ -47,10 +47,10 @@ services:
     container_name: AvvakumovOA-netology-prometheus
     command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
     ports:
-      - "9090:9090"                 # внешний доступ с докер-сервера
+      - "9090:9090"             # внешний доступ с докер-сервера
     volumes:
-      - ./6-04/prometheus:/etc/prometheus:ro  # конфиг из репо
-      - prometheus-data:/prometheus           # данные TSDB
+      - /home/sysadmin/6-04-Docker-part2/6-04/prometheus:/etc/prometheus:ro  # конфиг из репо
+      - prometheus-data:/prometheus                                          # данные TSDB
     networks:
       - AvvakumovOA-my-netology-hw
     restart: unless-stopped
@@ -77,7 +77,7 @@ scrape_configs:
       - targets: ["localhost:9090"]
 ```
 
-[docker compose up -d](https://drive.google.com/file/d/188IclTT8RrdMNZZ0eKj1zJjIntmg045u/view?usp=sharing)
+[docker compose up -d](https://drive.google.com/file/d/1gHfuZK0SfJZLzxQQCImkYIGMEcn7RmHo/view?usp=sharing)
 
 ---
 
