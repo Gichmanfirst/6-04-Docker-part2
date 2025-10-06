@@ -1,0 +1,14 @@
+version: "3.8"
+
+services: {}
+  # Сервисы добавим в следующих заданиях.
+  
+volumes: {}
+
+networks:
+  AvvakumovOA-my-netology-hw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
