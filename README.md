@@ -139,9 +139,9 @@ scrape_configs:
 
 
 
-[prometheus_pushgateaway_bash](https://drive.google.com/file/d/1xqRwuTkA5K4_ftmldO26EwVVi3VYIY2V/view?usp=sharing)
-[prometheus](https://drive.google.com/file/d/1eVJCNe3vf6wDtIRnGmKuPZ_7JmosjVLC/view?usp=sharing)
-[pushgateaway](https://drive.google.com/file/d/18q_ugnh6loIIlBsyuowiaZC53F9BXIL_/view?usp=sharing)
+![prometheus_pushgateaway_bash](https://drive.google.com/file/d/1xqRwuTkA5K4_ftmldO26EwVVi3VYIY2V/view?usp=sharing)
+![prometheus](https://drive.google.com/file/d/1eVJCNe3vf6wDtIRnGmKuPZ_7JmosjVLC/view?usp=sharing)
+![pushgateaway](https://drive.google.com/file/d/18q_ugnh6loIIlBsyuowiaZC53F9BXIL_/view?usp=sharing)
 
 
 ### Задание 5
