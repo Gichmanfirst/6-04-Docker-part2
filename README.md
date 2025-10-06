@@ -363,10 +363,7 @@ networks:
 
 ### Задание 8
 
-![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
-![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
-![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
-![docker compose up -d](https://drive.google.com/file/d/1v_GXIr1k0QtsC2BxOtlgx946dIhdz6OE/view)
+![docker compose down -v --remove-orphans](https://drive.google.com/file/d/1fEHVzuAMopFQ7F4J4RZiz7gaIkv1BW3m/view?usp=sharing)
 
 
 
